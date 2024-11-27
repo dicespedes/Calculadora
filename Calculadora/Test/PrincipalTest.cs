@@ -27,7 +27,7 @@ namespace Calculadora.Test
         [Test]
         public void Suma()
         {   
-            principal.calcularSuma();
+            principal.calcular("1","1","2");//1 para add
             //Assert.Pass();
         }
     }

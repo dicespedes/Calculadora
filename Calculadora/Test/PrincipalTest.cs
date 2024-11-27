@@ -1,3 +1,4 @@
+using Calculadora.Genericos;
 using Calculadora.PageObject;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -9,6 +10,7 @@ namespace Calculadora.Test
     {
         public IWebDriver driver ;
         public PrincipalObject principal;
+        public LeerJson json;
         [SetUp]
         public void setup()
         {
@@ -16,6 +18,7 @@ namespace Calculadora.Test
             driver.Manage().Window.Minimize();
             driver.Navigate().GoToUrl("https://testsheepnz.github.io/BasicCalculator.html");
             principal = new PrincipalObject(driver);
+            json = new LeerJson();
         }
         [TearDown]
         public void teardown() 
@@ -26,8 +29,9 @@ namespace Calculadora.Test
 
         [Test]
         public void Suma()
-        {   
-            principal.calcular("1","1","2");//1 para add
+        {
+            var data = json.principal_data();
+            principal.calcular(data.Operation, data.Number1, data.Number2);//1 para add
             //Assert.Pass();
         }
     }

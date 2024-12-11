@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework.Constraints;
+using OpenQA.Selenium;
+using OpenQA.Selenium.DevTools.V130.CSS;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -19,22 +21,43 @@ namespace Calculadora.PageObject.Principal
         private readonly By _txtNumber2 = By.Id("number2Field");
         private readonly By _btnCalculate = By.Id("calculateButton");
         private readonly By _drpOperation = By.Id("selectOperationDropdown");
+        private readonly By _txtResultado = By.Id("numberAnswerField");
 
         public IWebElement txtNumber1 => _driver.FindElement(_txtNumber1);
         public IWebElement txtNumber2 => _driver.FindElement(_txtNumber2);
         public IWebElement btnCalculate => _driver.FindElement(_btnCalculate);
         public IWebElement drpOperation => _driver.FindElement(_drpOperation);
+        public IWebElement txtResultado => _driver.FindElement(_txtResultado);
 
+        private string operacion(string Ope, string nu1, string nu2)
+        {
+            return Ope switch
+            {
+                "0" => (Convert.ToDouble(nu1) + Convert.ToDouble(nu2)).ToString(),
+                "1" => (Convert.ToDouble(nu1) - Convert.ToDouble(nu2)).ToString(),
+                "2" => (Convert.ToDouble(nu1) * Convert.ToDouble(nu2)).ToString(),
+                "3" => (Convert.ToDouble(nu1) / Convert.ToDouble(nu2)).ToString(),
+                "4" => (nu1 + nu2),
+                _ => ""
+            };            
+        }
 
-        public void calcular(string op, string num1, string num2)
+        public bool calcular(string op, string num1, string num2)
         {
             txtNumber1.SendKeys(num1);
             txtNumber2.SendKeys(num2);
-            //var selectElement = drpOperation.FindElement(By.CssSelector("option"));
-            //var select = new SelectElement(selectElement);
-            //select.SelectByValue(op);
+            //var selectElement = drpOperation.FindElement(By.Id("selectOperationDropdown"));
+             var select = new SelectElement(drpOperation);
+            select.SelectByValue(op);
             btnCalculate.Click();
-
+            //double temporal = (Convert.ToDouble(num1) + Convert.ToDouble(num2));
+            string data = ValorResultado();
+            string res = this.operacion(op, num1, num2);
+            return data.Equals(res);
+        }
+        public string ValorResultado()
+        {
+            return this.txtResultado.Text;
         }
     }
 }

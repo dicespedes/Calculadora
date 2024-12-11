@@ -20,6 +20,7 @@ namespace Calculadora.Test
         public void setup()
         {
             driver = new ChromeDriver();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);  //espera implicita
             driver.Manage().Window.Minimize();
             driver.Navigate().GoToUrl("https://testsheepnz.github.io/BasicCalculator.html");
             principal = new PrincipalPage(driver);

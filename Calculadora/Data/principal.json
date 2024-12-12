@@ -1,5 +1,30 @@
 {
-  "Number1": "1",
-  "Number2": "2",
-  "Operation": "1"
+  "operaciones": [
+    {
+      "Number1": "6",
+      "Number2": "7",
+      "Operation": "0"
+    },
+    {
+      "Number1": "6",
+      "Number2": "7",
+      "Operation": "1"
+    },
+    {
+      "Number1": "6",
+      "Number2": "7",
+      "Operation": "2"
+    },
+    {
+      "Number1": "6",
+      "Number2": "7",
+      "Operation": "3"
+    },
+    {
+      "Number1": "6",
+      "Number2": "7",
+      "Operation": "4"
+    }
+
+  ]
 }

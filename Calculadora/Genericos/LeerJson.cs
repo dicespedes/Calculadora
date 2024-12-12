@@ -9,10 +9,10 @@ namespace Calculadora.Genericos
 {
     public class LeerJson
     {
-        public POCO.PrincipalData principal_data() 
+        public List<POCO.PrincipalData> principal_data() 
         {
-            var json = JsonConvert.DeserializeObject<POCO.PrincipalData>(File.ReadAllText(@"..\..\..\Data\principal.json"));
-            return json; 
+            var json = JsonConvert.DeserializeObject<Dictionary<String, List<POCO.PrincipalData>>>(File.ReadAllText(@"..\..\..\Data\principal.json"));
+            return json["operaciones"]; 
         }
     }
 }

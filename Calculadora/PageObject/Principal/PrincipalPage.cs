@@ -46,13 +46,15 @@ namespace Calculadora.PageObject.Principal
         {
             txtNumber1.SendKeys(num1);
             txtNumber2.SendKeys(num2);
+            //string pru2 = txtNumber2.GetAttribute("value");
             //var selectElement = drpOperation.FindElement(By.Id("selectOperationDropdown"));
-             var select = new SelectElement(drpOperation);
+            var select = new SelectElement(drpOperation);
             select.SelectByValue(op);
             btnCalculate.Click();
             //double temporal = (Convert.ToDouble(num1) + Convert.ToDouble(num2));
-            string data = ValorResultado();
-            string res = this.operacion(op, num1, num2);
+            //string pru = txtNumber2.Text; 
+            string data = txtResultado.GetAttribute("value");
+            string res = this.operacion(op, num1, num2).Replace(",",".");
             return data.Equals(res);
         }
         public string ValorResultado()
